@@ -26,7 +26,7 @@
 	</classpathentry>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot-starter/1.5.3.RELEASE/spring-boot-starter-1.5.3.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/boot/spring-boot/1.5.3.RELEASE/spring-boot-1.5.3.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-core/4.3.8.RELEASE/spring-core-4.3.8.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-core/4.3.8.RELEASE/spring-core-4.3.8.RELEASE.jar" sourcepath="SOURCE_ATTACHER/spring-core-4.3.8.RELEASE-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-context/4.3.8.RELEASE/spring-context-4.3.8.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-aop/4.3.8.RELEASE/spring-aop-4.3.8.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-beans/4.3.8.RELEASE/spring-beans-4.3.8.RELEASE.jar"/>

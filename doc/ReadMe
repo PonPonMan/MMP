@@ -1,7 +1,0 @@
-1、打包：pom.xml指定本项目的打包方式为jar包：<packaging>jar</packaging>
-2、启动：java -jar ~/XXX/XXX/.jar
-3、入口：MyStartup类的main方法（只留一个main入口，扫描全局com）
-4、mybatis插件：pagehelper版本4.1.6 太低太高都报错
-5、基本流程：
-	一、启动时，通过http获取deviceServer和deviceWarning的json数据（如果要更新数据，就需要重新启动jar包）
-	二、定时启动线程做出机型的判断
