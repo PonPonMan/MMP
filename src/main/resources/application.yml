@@ -1,0 +1,12 @@
+spring:  
+  mail:  
+    host: smtp.qiye.163.com  
+    username: apptest@meitu.com  
+    password: Zpp979!@
+    properties:  
+      mail:  
+        smtp:  
+          auth: true  
+          starttls:  
+            enable: true  
+            required: true  
