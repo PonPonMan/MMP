@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,12 @@ import com.module.device.dao.DeviceDao;
 public class DeviceController {
 	@Autowired
 	private DeviceDao deviceDAO;
+
+	@RequestMapping("/device/page/{pageNumber}/{pageSize}")
+	public String page(@PathVariable("pageNumber") int pageNumber, @PathVariable("pageSize") int pageSize) {
+		Page<Device> devices = deviceDAO.findAll(new PageRequest(pageNumber - 1, pageSize));
+		return new Gson().toJson(devices.getContent());
+	}
 
 	@RequestMapping("/device/list")
 	public String list() {
