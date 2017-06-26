@@ -27,6 +27,6 @@ public class HtmlController {
 		List<Device> devices = deviceDAO.findAll();
 		model.addAttribute("devices", devices);
 		model.addAttribute("message", "fej");
-		return "list";
+		return "index";
 	}
 }
