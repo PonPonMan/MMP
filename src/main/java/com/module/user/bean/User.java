@@ -33,7 +33,7 @@ public class User extends IdEntity {
 	/* 账户是否锁定 */
 	private boolean locked;
 
-	@Column(length = 100, unique = true)
+	@Column(length = 100)
 	public String getUsername() {
 		return username;
 	}
