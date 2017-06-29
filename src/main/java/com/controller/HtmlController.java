@@ -22,11 +22,4 @@ public class HtmlController {
 		return "hello";
 	}
 
-	@RequestMapping("/index")
-	public String hello(Model model) {
-		List<Device> devices = deviceDAO.findAll();
-		model.addAttribute("devices", devices);
-		model.addAttribute("message", "fej");
-		return "index";
-	}
 }

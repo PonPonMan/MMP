@@ -43,7 +43,7 @@ public class ShiroConfiguration {
 		// 拦截器.
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 
-		// 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
+		// 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了,默认登出跳转到登录login
 		filterChainDefinitionMap.put("/logout", "logout");
 
 		// <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
