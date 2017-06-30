@@ -42,10 +42,7 @@ public class LoginController {
 		return "/login";
 	}
 
-	@RequestMapping("/")
-	public String index(Model model) {
-		return "index";
-	}
+
 	@RequestMapping("/index")
 	public String index1(Model model) {
 		return "index";
