@@ -5,7 +5,9 @@ import javax.annotation.Resource;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -27,7 +29,10 @@ public class MyShiroRealm extends AuthorizingRealm {
 		String username = (String) token.getPrincipal();
 		User user = userDAO.findByUsername(username);
 		if (user == null) {
-			return null;
+			throw new UnknownAccountException();
+		}
+		if (user.isLocked()) {
+			throw new LockedAccountException();
 		}
 		return new SimpleAuthenticationInfo(username, user.getPassword(),
 				ByteSource.Util.bytes(user.getCredentialsSalt()), getName());

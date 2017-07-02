@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html class="no-js fixed-layout" xmlns:th="http://www.thymeleaf.org">
+<head th:include="admin/fragments/head :: myHead('首页')">
+<body>
+	<div th:include="admin/fragments/header :: myHeader">顶部菜单栏</div>
+	<div class="am-cf admin-main">
+		<div th:include="admin/fragments/sidebar :: mySidebar">左边菜单栏</div>
+		<!-- content start -->
+		<div class="admin-content">
+			<div class="admin-content-body">
+				<div class="am-cf am-padding">
+					<div class="am-fl am-cf">
+						<strong class="am-text-primary am-text-lg">首页</strong>
+					</div>
+				</div>
+				<div class="am-g">
+					<div class="am-u-sm-12 am-u-sm-centered">
+						<h2>mmp 1.0.0 Beta</h2>
+						<hr />
+					</div>
+
+					<div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+						<h3>学习链接</h3>
+						<ol>
+							<li><a href="http://blog.csdn.net/linxingliang/article/details/52069532" target="_blank">spring boot</a></li>
+							<li><a href="http://www.cnblogs.com/learnhow/p/5694876.html" target="_blank">shiro</a></li>
+							<li><a href="http://blog.csdn.net/u012706811/article/details/52185345" target="_blank">thymeleaf</a></li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div th:include="admin/fragments/footer :: #myFooter">default</div>
+		</div>
+	</div>
+	<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+</body>
+</html>
