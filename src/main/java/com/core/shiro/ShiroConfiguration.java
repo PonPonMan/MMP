@@ -15,6 +15,8 @@ import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+
 @Configuration
 public class ShiroConfiguration {
 	private Logger log = Logger.getLogger(getClass().getName());
@@ -50,7 +52,7 @@ public class ShiroConfiguration {
 		// 登录成功后要跳转的链接
 		shiroFilterFactoryBean.setSuccessUrl("/admin/index");
 		// 未授权界面;
-		shiroFilterFactoryBean.setUnauthorizedUrl("/error");
+		// shiroFilterFactoryBean.setUnauthorizedUrl("/error");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;
 	}
@@ -94,7 +96,7 @@ public class ShiroConfiguration {
 	 */
 	@Bean
 	public HashedCredentialsMatcher hashedCredentialsMatcher() {
-		HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+		HashedCredentialsMatcher hashedCredentialsMatcher = new RetryLimitHashedCredentialsMatcher(ehCacheManager());
 		hashedCredentialsMatcher.setHashAlgorithmName(ShiroConstant.ALGORITHM_NAME);
 		hashedCredentialsMatcher.setHashIterations(ShiroConstant.HASH_ITERATIONS);
 		return hashedCredentialsMatcher;
@@ -157,5 +159,17 @@ public class ShiroConfiguration {
 		// <!-- 记住我cookie生效时间30天 ,单位秒;-->
 		simpleCookie.setMaxAge(259200);
 		return simpleCookie;
+	}
+
+	/**
+	 * 
+	 * @描述 配合前端shiro标签
+	 * @作者 傅文城
+	 * @date 2017年7月3日
+	 * @return
+	 */
+	@Bean
+	public ShiroDialect shiroDialect() {
+		return new ShiroDialect();
 	}
 }

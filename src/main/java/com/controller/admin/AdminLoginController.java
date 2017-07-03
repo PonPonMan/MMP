@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -31,6 +32,9 @@ public class AdminLoginController {
 			} else if (IncorrectCredentialsException.class.getName().equals(exception)) {
 				log.info("IncorrectCredentialsException -- > 密码不正确：");
 				msg = "IncorrectCredentialsException -- > 密码不正确：";
+			} else if (ExcessiveAttemptsException.class.getName().equals(exception)) {
+				log.info("ExcessiveAttemptsException -- > 登录失败次数过多：");
+				msg = "ExcessiveAttemptsException -- > 登录失败次数过多：";
 			} else if ("kaptchaValidateFailed".equals(exception)) {
 				log.info("kaptchaValidateFailed -- > 验证码错误");
 				msg = "kaptchaValidateFailed -- > 验证码错误";
@@ -38,7 +42,7 @@ public class AdminLoginController {
 				msg = "else >> " + exception;
 				log.info("else -- >" + exception);
 			}
-		} 
+		}
 		map.put("msg", msg);
 		// 此方法不处理登录成功,由shiro进行处理.
 		return "admin/login";

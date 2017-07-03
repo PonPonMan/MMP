@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,13 +25,13 @@ public class AdminUserController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	// @RequiresPermissions("user:list")
-	@ResponseBody
-	public JSONObject getUserList() {
+	public String getUserList(Model model) {
 		List<User> users = userDAO.findAll();
-		for (User user: users){
+		for (User user : users) {
 			user.setRoleList(null);
 		}
-		return JsonTool.genSuccessMsg(users);
+		model.addAttribute("users", users);
+		return "admin/user/index";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
