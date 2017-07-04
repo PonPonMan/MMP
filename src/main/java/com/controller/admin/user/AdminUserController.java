@@ -4,10 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,9 +21,8 @@ public class AdminUserController {
 	@Resource
 	private UserDao userDAO;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	// @RequiresPermissions("user:list")
-	public String getUserList(Model model) {
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(Model model) {
 		List<User> users = userDAO.findAll();
 		for (User user : users) {
 			user.setRoleList(null);
@@ -34,10 +31,9 @@ public class AdminUserController {
 		return "admin/user/index";
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	// @RequiresPermissions("user:get")
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	@ResponseBody
-	public JSONObject getUser(@PathVariable String id) {
+	public JSONObject get(String id) {
 		User user = userDAO.findOne(id);
 		user.setRoleList(null);
 		return JsonTool.genSuccessMsg(user);
@@ -49,26 +45,23 @@ public class AdminUserController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	// @RequiresPermissions("user:add")
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject postUser(User user) {
+	public JSONObject add(User user) {
 		userDAO.save(user);
 		return JsonTool.genSuccessMsg("保存成功");
 	}
 
 	/**
-	 * 使用put 进行更新用户.
+	 * 更新用户.
 	 * 
-	 * @param id
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	// @RequiresPermissions("user:update")
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject putUser(@PathVariable String id, User user) {
-		User u = userDAO.findOne(id);
+	public JSONObject update(User user) {
+		User u = userDAO.findOne(user.getId());
 		u.setPassword(user.getPassword());
 		userDAO.saveAndFlush(u);
 		return JsonTool.genSuccessMsg("更新成功");
@@ -80,10 +73,9 @@ public class AdminUserController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	// @RequiresPermissions("user:del")
+	@RequestMapping(value = "/delete")
 	@ResponseBody
-	public JSONObject deleteUser(@PathVariable String id) {
+	public JSONObject delete(String id) {
 		userDAO.delete(id);
 		return JsonTool.genSuccessMsg("删除成功");
 	}
