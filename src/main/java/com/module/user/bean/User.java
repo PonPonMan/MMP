@@ -10,6 +10,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.core.bean.IdEntity;
 import com.module.role.bean.Role;
 
@@ -19,8 +22,10 @@ public class User extends IdEntity {
 
 	private static final long serialVersionUID = 1L;
 	/* 账号 */
+	@NotEmpty(message = "账号不能为空")
 	private String username;
 	/* 密码 */
+	@Length(min = 6, message = "密码长度不能小于6位")
 	private String password;
 	/* 盐 */
 	private String salt;
@@ -68,7 +73,6 @@ public class User extends IdEntity {
 		this.locked = locked;
 	}
 
-	
 	public List<Role> getRoleList() {
 		return roleList;
 	}

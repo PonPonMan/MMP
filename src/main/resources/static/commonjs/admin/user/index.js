@@ -4,10 +4,12 @@ $(function() {
 			type : 2,
 			border : [ 0 ],
 			title : '用户新增',
-			shadeClose : true,
-			closeBtn : false,
+			shade:0.1,
+			shadeClose : false,
+			scrollbar: false,
+			closeBtn : 1,
 			content : '/admin/user?p=add',
-			area : [ '860px', '500px' ]
+			area : [ '550px', '270px' ]
 		});
 	});
 });

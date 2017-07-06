@@ -3,9 +3,12 @@ package com.controller.admin.user;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,7 +50,11 @@ public class AdminUserController {
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject add(User user) {
+	public JSONObject add(@Valid User user, BindingResult result) {
+		if (result.hasErrors()) {
+			List<ObjectError> list = result.getAllErrors();
+			return JsonTool.genErrorMsg(list);
+		}
 		userDAO.save(user);
 		return JsonTool.genSuccessMsg("保存成功");
 	}
