@@ -9,7 +9,7 @@ $(function() {
 			scrollbar: false,
 			closeBtn : 1,
 			content : '/admin/user?p=add',
-			area : [ '550px', '270px' ]
+			area : [ '550px', '300px' ]
 		});
 	});
 });

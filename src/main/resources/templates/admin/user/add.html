@@ -4,21 +4,21 @@
 <body>
 	<form id="form" method="post" th:action="@{/admin/user/add}" class="am-form">
 		<div class="am-g am-margin-top-sm">
-			<div class="am-u-sm-3 am-u-md-2 am-text-right">账号</div>
+			<div class="am-u-sm-3 am-u-md-2 am-text-right">账号*</div>
 			<div class="am-u-sm-6 am-u-md-4 am-u-end">
-				<input type="text" name="username" class="am-input-sm required">
+				<input id="username" type="text" name="username" class="am-input-sm">
 			</div>
 		</div>
 		<div class="am-g am-margin-top-sm">
-			<div class="am-u-sm-3 am-u-md-2 am-text-right">密码</div>
+			<div class="am-u-sm-3 am-u-md-2 am-text-right">密码*</div>
 			<div class="am-u-sm-6 am-u-md-4 am-u-end">
-				<input type="password" name="password" class="am-input-sm">
+				<input id="password" type="password" name="password" class="am-input-sm">
 			</div>
 		</div>
 		<div class="am-g am-margin-top-sm">
-			<div class="am-u-sm-3 am-u-md-2 am-text-right">确认密码</div>
+			<div class="am-u-sm-3 am-u-md-2 am-text-right">确认密码*</div>
 			<div class="am-u-sm-6 am-u-md-4 am-u-end">
-				<input type="password" name="repassword" class="am-input-sm">
+				<input id="repassword" type="password" name="repassword" class="am-input-sm">
 			</div>
 		</div>
 	</form>
