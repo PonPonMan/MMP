@@ -1,9 +1,9 @@
 package com.controller.admin.user;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,13 +24,25 @@ public class AdminUserController extends BaseController {
 	@Resource
 	private UserDao userDAO;
 
+	/**
+	 * 
+	 * @描述：展示列表 @跳转：无
+	 * @作者：傅文城
+	 *
+	 * @param pageNumber
+	 *            0表示第一页
+	 * @param pageSize
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
-		List<User> users = userDAO.findAll();
-		for (User user : users) {
+	public String list(@RequestParam(defaultValue = "0") int pageNumber, @RequestParam(defaultValue = "5") int pageSize,
+			Model model) {
+		Page<User> users = userDAO.findAll(new PageRequest(pageNumber, pageSize));
+		for (User user : users.getContent()) {
 			user.setRoleList(null);
 		}
-		model.addAttribute("users", users);
+		model.addAttribute("userPage", users);
 		return "admin/user/index";
 	}
 

@@ -49,7 +49,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="user:${users}">
+								<tr th:each="user:${userPage.content}">
 									<td><input type="checkbox" name="check" th:value="${user.id}" class="checkOne"/></td>
 									<td th:text="${user.username}">账号</td>
 									<td th:text="${user.salt}">盐</td>
@@ -70,18 +70,8 @@
 							</tbody>
 						</table>
 						<div class="am-cf">
-							共 1 条记录
-							<div class="am-fr">
-								<ul class="am-pagination">
-									<li class="am-disabled"><a href="#">«</a></li>
-									<li class="am-active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">»</a></li>
-								</ul>
-							</div>
+							共 <span th:text="${userPage.totalElements}"></span> 条记录
+							<div class="am-fr selector"></div>
 						</div>
 						<hr />
 					</div>
@@ -90,6 +80,11 @@
 			<div th:include="admin/fragments/footer :: #myFooter">default</div>
 		</div>
 	</div>
+	<form id="form" th:action="@{/admin/user/list}" method="get">
+		<input type="hidden" name="pageNumber" th:value="${userPage.number}">
+		<input type="hidden" name="pageSize" th:value="${userPage.size}">
+		<input type="hidden" name="total" th:value="${userPage.totalElements}">
+	</form>
 	<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
 	<script type="text/javascript">
 		document.write("<s" + "cript type='text/javascript' src='/commonjs/admin/user/index.js?" + Math.random() + "'></s" + "cript>");

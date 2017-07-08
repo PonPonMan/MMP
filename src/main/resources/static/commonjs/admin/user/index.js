@@ -12,6 +12,23 @@ function edit(content) {
 	});
 }
 $(function() {
+	//翻页查询
+	var pageForm = $('#form');
+	var inputPageNumber =  pageForm.find('input[name=pageNumber]');
+	var inputPageSize = pageForm.find('input[name=pageSize]');
+	var inputTotal = pageForm.find('input[name=total]');
+	$(".selector").pagination({
+        items: inputTotal.val(),
+	    itemsOnPage: inputPageSize.val(),
+	    currentPage: parseInt(inputPageNumber.val()) + 1,
+        cssStyle: 'compact-theme',
+        prevText:"上一页",
+        nextText:"下一页",
+        onPageClick:function(pageNumber){
+        	inputPageNumber.val(pageNumber - 1);
+        	pageForm.submit();
+        }
+    });
 	// 添加按钮
 	$('#addBtn').click(function() {
 		edit('/admin/user?p=edit');
