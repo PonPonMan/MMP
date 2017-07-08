@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html class="no-js fixed-layout" xmlns:th="http://www.thymeleaf.org">
+<head th:include="admin/fragments/head :: myHead('用户编辑')">
+<body>
+	<form id="form" class="am-form">
+		<input type="hidden" name = "id" th:value="${user}!=null? ${user.id} :''">
+		<div class="am-g am-margin-top-sm">
+			<div class="am-u-sm-3 am-u-md-2 am-text-right">账号*</div>
+			<div class="am-u-sm-6 am-u-md-4 am-u-end">
+				<input id="username" type="text" name="username" class="am-input-sm" th:value="${user}!=null? ${user.username} :''">
+			</div>
+		</div>
+		<div class="am-g am-margin-top-sm">
+			<div class="am-u-sm-3 am-u-md-2 am-text-right">密码*</div>
+			<div class="am-u-sm-6 am-u-md-4 am-u-end">
+				<input id="password" type="password" name="password" class="am-input-sm" th:value="${user}!=null? ${user.password} :''">
+			</div>
+		</div>
+		<div class="am-g am-margin-top-sm">
+			<div class="am-u-sm-3 am-u-md-2 am-text-right">确认密码*</div>
+			<div class="am-u-sm-6 am-u-md-4 am-u-end">
+				<input id="repassword" type="password" name="repassword" class="am-input-sm" th:value="${user}!=null? ${user.password} :''">
+			</div>
+		</div>
+		<div class="am-margin">
+			<div class=" am-u-sm-offset-3 am-u-sm-5 am-u-md-5">
+				<button type="submit" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+				<button id="closeBtn" type="button" class="am-btn am-btn-primary am-btn-xs">放弃保存</button>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+		document.write("<s" + "cript type='text/javascript' src='/commonjs/admin/user/edit.js?" + Math.random() + "'></s" + "cript>");
+	</script>
+</body>
+</html>

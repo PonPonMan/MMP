@@ -3,24 +3,24 @@ package com.controller.admin.user;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.core.shiro.PasswordHelper;
 import com.core.utils.JsonTool;
+import com.core.web.BaseController;
 import com.module.user.bean.User;
 import com.module.user.dao.UserDao;
 
 @Controller("adminUserController")
 @RequestMapping("/admin/user")
-public class AdminUserController {
+public class AdminUserController extends BaseController {
 	@Resource
 	private UserDao userDAO;
 
@@ -34,14 +34,6 @@ public class AdminUserController {
 		return "admin/user/index";
 	}
 
-	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	@ResponseBody
-	public JSONObject get(String id) {
-		User user = userDAO.findOne(id);
-		user.setRoleList(null);
-		return JsonTool.genSuccessMsg(user);
-	}
-
 	/**
 	 * post 保存用户.
 	 * 
@@ -50,11 +42,11 @@ public class AdminUserController {
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public JSONObject add(@Valid User user, BindingResult result) {
-		if (result.hasErrors()) {
-			List<ObjectError> list = result.getAllErrors();
-			return JsonTool.genErrorMsg(list);
+	public JSONObject add(User user) {
+		if (!beanValidator(user)) {
+			return JsonTool.genErrorMsg(message());
 		}
+		new PasswordHelper().encryptPasswordNoSalt(user);
 		userDAO.save(user);
 		return JsonTool.genSuccessMsg("保存成功");
 	}
@@ -68,8 +60,12 @@ public class AdminUserController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONObject update(User user) {
+		if (!beanValidator(user)) {
+			return JsonTool.genErrorMsg(message());
+		}
 		User u = userDAO.findOne(user.getId());
 		u.setPassword(user.getPassword());
+		new PasswordHelper().encryptPassworHaveSalt(u);
 		userDAO.saveAndFlush(u);
 		return JsonTool.genSuccessMsg("更新成功");
 	}
@@ -85,5 +81,26 @@ public class AdminUserController {
 	public JSONObject delete(String id) {
 		userDAO.delete(id);
 		return JsonTool.genSuccessMsg("删除成功");
+	}
+
+	/**
+	 * 使用delete删除用户组.
+	 * 
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteAll")
+	@ResponseBody
+	public JSONObject deleteAll(@RequestParam(value = "ids[]") String[] ids) {
+		for (String id : ids) {
+			userDAO.delete(id);
+		}
+		return JsonTool.genSuccessMsg("删除成功");
+	}
+
+	public User get(String id) {
+		User user = userDAO.findOne(id);
+		user.setRoleList(null);
+		return user;
 	}
 }

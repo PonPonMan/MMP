@@ -21,7 +21,7 @@
 								<button id="addBtn" type="button" class="am-btn am-btn-default">
 									<span class="am-icon-plus"></span> 新增
 								</button>
-								<button type="button" class="am-btn am-btn-default">
+								<button id="delAllBtn" type="button" class="am-btn am-btn-default">
 									<span class="am-icon-trash-o"></span> 删除
 								</button>
 							</div>
@@ -41,7 +41,7 @@
 						<table class="am-table am-table-striped am-table-hover table-main">
 							<thead>
 								<tr>
-									<th class="table-check"><input type="checkbox" /></th>
+									<th class="table-check"><input type="checkbox" class="checkAll"/></th>
 									<th class="table-id">账号</th>
 									<th class="table-title">盐</th>
 									<th class="table-type">是否锁定</th>
@@ -50,20 +50,17 @@
 							</thead>
 							<tbody>
 								<tr th:each="user:${users}">
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" name="check" th:value="${user.id}" class="checkOne"/></td>
 									<td th:text="${user.username}">账号</td>
 									<td th:text="${user.salt}">盐</td>
 									<td th:text="${user.locked}?是:否">是</td>
-									<td>
+									<td th:attr ="data-id=${user.id}">
 										<div class="am-btn-toolbar">
 											<div class="am-btn-group am-btn-group-xs">
-												<button class="am-btn am-btn-default am-btn-xs am-text-secondary">
+												<button class="editBtn am-btn am-btn-default am-btn-xs am-text-secondary">
 													<span class="am-icon-pencil-square-o"></span> 编辑
 												</button>
-												<button class="am-btn am-btn-default am-btn-xs am-hide-sm-only">
-													<span class="am-icon-copy"></span> 复制
-												</button>
-												<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
+												<button class="delBtn am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
 													<span class="am-icon-trash-o"></span> 删除
 												</button>
 											</div>

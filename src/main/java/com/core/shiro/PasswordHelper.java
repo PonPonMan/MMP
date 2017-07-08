@@ -8,8 +8,14 @@ import com.module.user.bean.User;
 
 public class PasswordHelper {
 
-	public void encryptPassword(User user) {
+	public void encryptPasswordNoSalt(User user) {
 		user.setSalt(new SecureRandomNumberGenerator().nextBytes().toHex());
+		String newPassword = new SimpleHash(ShiroConstant.ALGORITHM_NAME, user.getPassword(),
+				ByteSource.Util.bytes(user.getCredentialsSalt()), ShiroConstant.HASH_ITERATIONS).toHex();
+		user.setPassword(newPassword);
+	}
+
+	public void encryptPassworHaveSalt(User user) {
 		String newPassword = new SimpleHash(ShiroConstant.ALGORITHM_NAME, user.getPassword(),
 				ByteSource.Util.bytes(user.getCredentialsSalt()), ShiroConstant.HASH_ITERATIONS).toHex();
 		user.setPassword(newPassword);
