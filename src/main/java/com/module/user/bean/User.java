@@ -1,5 +1,6 @@
 package com.module.user.bean;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -37,6 +38,10 @@ public class User extends IdEntity {
 
 	/* 账户是否锁定 */
 	private boolean locked;
+	/* 创建时间 */
+	private Date createTime;
+	/* 更新时间 */
+	private Date updateTime;
 
 	@Column(length = 100)
 	public String getUsername() {
@@ -79,6 +84,24 @@ public class User extends IdEntity {
 
 	public void setRoleList(List<Role> roleList) {
 		this.roleList = roleList;
+	}
+
+	@Column(length = 100)
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	@Column(length = 100)
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	/**

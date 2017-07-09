@@ -29,6 +29,11 @@ $(function() {
         	pageForm.submit();
         }
     });
+	//搜索按钮
+	$('#searchBtn').click(function(){
+		var searchParam = $('#searchParam').val();
+		window.location.href="/admin/user/list?searchParam="+searchParam;
+	});
 	// 添加按钮
 	$('#addBtn').click(function() {
 		edit('/admin/user?p=edit');

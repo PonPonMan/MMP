@@ -29,8 +29,8 @@
 					</div>
 					<div class="am-u-sm-12 am-u-md-3">
 						<div class="am-input-group am-input-group-sm">
-							<input type="text" class="am-form-field"> <span class="am-input-group-btn">
-								<button class="am-btn am-btn-default" type="button">搜索</button>
+							<input id="searchParam" th:value="${searchParam}" type="text" class="am-form-field"> <span class="am-input-group-btn">
+								<button id="searchBtn" class="am-btn am-btn-default" type="button">搜索</button>
 							</span>
 						</div>
 					</div>
@@ -43,7 +43,8 @@
 								<tr>
 									<th class="table-check"><input type="checkbox" class="checkAll"/></th>
 									<th class="table-id">账号</th>
-									<th class="table-title">盐</th>
+									<th class="table-salt">盐</th>
+									<th class="table-createTime">创建时间</th>
 									<th class="table-type">是否锁定</th>
 									<th class="table-set">操作</th>
 								</tr>
@@ -53,6 +54,7 @@
 									<td><input type="checkbox" name="check" th:value="${user.id}" class="checkOne"/></td>
 									<td th:text="${user.username}">账号</td>
 									<td th:text="${user.salt}">盐</td>
+									<td th:text="${user.createTime}">创建时间</td>
 									<td th:text="${user.locked}?是:否">是</td>
 									<td th:attr ="data-id=${user.id}">
 										<div class="am-btn-toolbar">
@@ -84,6 +86,7 @@
 		<input type="hidden" name="pageNumber" th:value="${userPage.number}">
 		<input type="hidden" name="pageSize" th:value="${userPage.size}">
 		<input type="hidden" name="total" th:value="${userPage.totalElements}">
+		<input type="hidden" name="searchParam" th:value="${searchParam}">
 	</form>
 	<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
 	<script type="text/javascript">

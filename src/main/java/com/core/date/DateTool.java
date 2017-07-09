@@ -3,6 +3,7 @@ package com.core.date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * 日期工具类
@@ -40,6 +41,15 @@ public class DateTool {
 	 * @return yyyy-MM-dd HH:mm:ss
 	 */
 	public static Timestamp getCurrTimestamp() {
+		return Timestamp.valueOf(getCurrTimeString());
+	}
+
+	/**
+	 * 返回当前时间
+	 * 
+	 * @return yyyy-MM-dd HH:mm:ss
+	 */
+	public static Date getCurrTimesDate() {
 		return Timestamp.valueOf(getCurrTimeString());
 	}
 }
