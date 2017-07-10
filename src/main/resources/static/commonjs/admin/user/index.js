@@ -22,8 +22,8 @@ $(function() {
 	    itemsOnPage: inputPageSize.val(),
 	    currentPage: parseInt(inputPageNumber.val()) + 1,
         cssStyle: 'mmp-theme',
-        prevText:"上一页",
-        nextText:"下一页",
+        prevText:"«",
+        nextText:"»",
         onPageClick:function(pageNumber){
         	inputPageNumber.val(pageNumber - 1);
         	pageForm.submit();
